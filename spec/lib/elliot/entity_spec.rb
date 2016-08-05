@@ -1,18 +1,14 @@
 require 'spec_helper'
-require 'pry'
 
 describe Elliot::Entity do
-  before do
-    class FakeEntity
-      include Hanami::Entity
-      include Elliot::Entity
-    end
+  subject do
+    fake = FakeEntity.new
+    fake.password = 'foobar'
+    fake
   end
 
-  subject do
-    f = FakeEntity.new
-    f.password = 'foobar'
-    f
+  it 'has an email attribute' do
+    expect(subject).to respond_to :email
   end
 
   it 'has a password_digest attribute' do
